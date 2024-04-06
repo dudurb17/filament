@@ -24,7 +24,36 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                //
+
+                Forms\Components\Section::make('User Information')
+                    ->description('Update the user\s information')
+                    ->icon('heroicon-o-clock')
+                    // ->aside()
+                    ->collapsed()
+                    ->schema([
+                    Forms\Components\TextInput::make('name')
+                        ->autofocus()
+                        ->required()
+                        ->placeholder('Informe o nome'),
+                    Forms\Components\TextInput::make('email')
+                        ->email()
+                        ->required(),
+                    Forms\Components\Toggle::make('active')
+                    ]),
+                Forms\Components\Section::make('Security Information')
+                ->description('Update the user\s security information')
+                ->icon('heroicon-o-lock-closed')
+                // ->aside()
+                ->collapsed()
+                ->schema([
+                    Forms\Components\TextInput::make('password')
+                        ->password()
+                        ->required()
+                        ->confirmed(),
+                    Forms\Components\TextInput::make('password_confirmation')
+                        ->password()
+                        ->label('Confirm Password')
+                ])
             ]);
     }
 
