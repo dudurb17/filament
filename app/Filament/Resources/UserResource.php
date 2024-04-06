@@ -3,16 +3,17 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use SebastianBergmann\CodeCoverage\Filter;
+
+use Illuminate\Database\Eloquent\Collection;
+
+
 
 class UserResource extends Resource
 {
@@ -88,6 +89,15 @@ class UserResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\BulkAction::make('EditAction')
+                    ->color('warning')
+                    ->requiresConfirmation()
+                    ->icon('heroicon-o-x-circle')
+                    ->action(fn(Collection $records)=> $records->each->update(['active'=>false]))
+                    ->after(fn()=>Notification::make()
+                    ->title('saved successfully')
+                    ->success()
+                    ->send()),
                 ]),
             ]);
     }
