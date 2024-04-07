@@ -25,7 +25,6 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-
                 Forms\Components\Section::make('User Information')
                     ->description('Update the user\s information')
                     ->icon('heroicon-o-clock')
@@ -36,6 +35,8 @@ class UserResource extends Resource
                         ->autofocus()
                         ->required()
                         ->placeholder('Informe o nome'),
+                    Forms\Components\FileUpload::make('avatar')
+                        ->image(),
                     Forms\Components\TextInput::make('email')
                         ->email()
                         ->required(),

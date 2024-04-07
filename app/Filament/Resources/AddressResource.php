@@ -24,7 +24,33 @@ class AddressResource extends Resource
     {
         return $form
             ->schema([
-                //
+
+                Forms\Components\Section::make('Address Information')
+                    ->description('Update the address information')
+                    ->icon('heroicon-o-clock')
+                    // ->aside()
+                    ->collapsed()
+                    ->schema([
+                    Forms\Components\TextInput::make('name')
+                        ->autofocus()
+                        ->required()
+                        ->placeholder('Informe o nome'),
+                   Forms\Components\Select::make('userId')
+                        ->label(__('usuario'))
+                        ->options(User::all()->pluck('name', 'id'))
+                        ->searchable()
+                        ->required()
+                        ->columnSpan(2),
+                    Forms\Components\TextInput::make('street')
+                        ->required()
+                        ->placeholder('Informe o rua'),
+                    Forms\Components\TextInput::make('number')
+                        ->required()
+                        ->placeholder('Informe o número'),
+                    Forms\Components\TextInput::make('neighborhood')
+                        ->required()
+                        ->placeholder('Informe o bairro'),
+                    ]),
             ]);
     }
 
