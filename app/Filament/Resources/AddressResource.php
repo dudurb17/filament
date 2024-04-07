@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\AddressResource\Pages;
 use App\Filament\Resources\AddressResource\RelationManagers;
 use App\Models\Address;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -34,7 +35,10 @@ class AddressResource extends Resource
                 Tables\Columns\TextColumn::make("name")
                 ->searchable()
                 ->sortable(),
-                Tables\Columns\TextColumn::make("userId")->label('Id do user'),
+                Tables\Columns\TextColumn::make("user.name")
+                ->numeric()
+                ->sortable()
+                ->label('Nome do usurio'),
                 Tables\Columns\TextColumn::make("street"),
                 Tables\Columns\TextColumn::make("number"),
 
