@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             'avatar'=>'https://avatars.githubusercontent.com/u/114515828?s=96&v=4'
         ]);
          User::factory(10)->create();
-
+         $this->call([
+         \Database\Seeders\AddressSeeder::class
+         ]);
 
     }
 }
