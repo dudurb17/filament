@@ -50,6 +50,10 @@ class AddressResource extends Resource
                     Forms\Components\TextInput::make('neighborhood')
                         ->required()
                         ->placeholder('Informe o bairro'),
+                    Forms\Components\Select::make('category')
+                                    ->relationship('category', 'name')
+                                    ->multiple()
+                                    ->required(),
                     ]),
             ]);
     }
