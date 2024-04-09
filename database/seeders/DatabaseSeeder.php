@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
         ]);
          User::factory(10)->create();
          $this->call([
-         \Database\Seeders\AddressSeeder::class
+         \Database\Seeders\AddressSeeder::class,
+         \Database\Seeders\CategorySeeder::class
          ]);
 
     }
